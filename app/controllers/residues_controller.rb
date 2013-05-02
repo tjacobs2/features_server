@@ -1,0 +1,2 @@
+class ResiduesController < ApplicationController
+end

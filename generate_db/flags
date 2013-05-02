@@ -1,0 +1,5 @@
+-database /home/tjacobs2/workspace/devel_rosetta/database
+-nooutput
+-l inputs.txt
+-parser:protocol parser_script.xml
+-ignore_unrecognized_res

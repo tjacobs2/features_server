@@ -1,5 +1,5 @@
 class Structure < ActiveRecord::Base
-	set_table_name "structures"
-
-	attr_accessible :batch_id, :input_tag
+	self.primary_key = "struct_id"
+	attr_accessible :struct_id, :batch_id, :input_tag
+	has_many :residues, :foreign_key => 'struct_id'
 end

@@ -12,6 +12,27 @@
 
 ActiveRecord::Schema.define(:version => 0) do
 
+# Could not dump table "atom_pairs" because of following StandardError
+#   Unknown type 'REAL' for column 'lower_break'
+
+# Could not dump table "atom_type_extra_parameters" because of following StandardError
+#   Unknown type 'REAL' for column 'value'
+
+  create_table "atom_type_properties", :primary_key => "atom_type_set_name", :force => true do |t|
+    t.text "name"
+    t.text "property"
+  end
+
+  add_index "atom_type_properties", ["atom_type_set_name", "name", "property"], :name => "sqlite_autoindex_atom_type_properties_1", :unique => true
+
+  create_table "atom_type_property_values", :primary_key => "property", :force => true do |t|
+  end
+
+  add_index "atom_type_property_values", ["property"], :name => "sqlite_autoindex_atom_type_property_values_1", :unique => true
+
+# Could not dump table "atom_types" because of following StandardError
+#   Unknown type 'REAL' for column 'lennard_jones_radius'
+
   create_table "batch_reports", :id => false, :force => true do |t|
     t.integer "batch_id"
     t.text    "report_name"
@@ -25,8 +46,15 @@ ActiveRecord::Schema.define(:version => 0) do
     t.text    "description"
   end
 
+  create_table "beta_turns", :primary_key => "struct_id", :force => true do |t|
+    t.integer "residue_begin"
+    t.text    "turn_type"
+  end
+
+  add_index "beta_turns", ["struct_id", "residue_begin"], :name => "sqlite_autoindex_beta_turns_1", :unique => true
+
   create_table "chain_endings", :id => false, :force => true do |t|
-    t.binary  "struct_id", :null => false
+    t.integer "struct_id", :null => false
     t.integer "end_pos"
   end
 
@@ -45,7 +73,7 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "features_reporters", ["report_name"], :name => "sqlite_autoindex_features_reporters_1", :unique => true
 
   create_table "fold_trees", :id => false, :force => true do |t|
-    t.binary  "struct_id",            :null => false
+    t.integer "struct_id",            :null => false
     t.integer "start_res"
     t.text    "start_atom"
     t.integer "stop_res"
@@ -53,6 +81,9 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer "label"
     t.integer "keep_stub_in_residue"
   end
+
+# Could not dump table "geometric_solvation" because of following StandardError
+#   Unknown type 'REAL' for column 'geometric_solvation_exact'
 
   create_table "hbond_chem_types", :primary_key => "chem_type", :force => true do |t|
     t.text "label"
@@ -125,18 +156,38 @@ ActiveRecord::Schema.define(:version => 0) do
 # Could not dump table "jumps" because of following StandardError
 #   Unknown type 'REAL' for column 'xx'
 
-# Could not dump table "nonprotein_residue_angles" because of following StandardError
-#   Unknown type 'REAL' for column 'chiangle'
+# Could not dump table "loop_anchor_transforms" because of following StandardError
+#   Unknown type 'REAL' for column 'x'
 
-# Could not dump table "nonprotein_residue_conformation" because of following StandardError
-#   Unknown type 'REAL' for column 'phi'
+# Could not dump table "loop_anchor_transforms_three_res" because of following StandardError
+#   Unknown type 'REAL' for column 'x'
+
+  create_table "loop_anchors", :primary_key => "struct_id", :force => true do |t|
+    t.integer "residue_begin"
+    t.integer "residue_end"
+  end
+
+  add_index "loop_anchors", ["struct_id", "residue_begin", "residue_end"], :name => "sqlite_autoindex_loop_anchors_1", :unique => true
+
+  create_table "pose_comments", :primary_key => "struct_id", :force => true do |t|
+    t.text "comment_key", :null => false
+    t.text "value",       :null => false
+  end
+
+  add_index "pose_comments", ["struct_id", "comment_key"], :name => "sqlite_autoindex_pose_comments_1", :unique => true
 
   create_table "pose_conformations", :id => false, :force => true do |t|
-    t.binary  "struct_id",          :null => false
+    t.integer "struct_id",          :null => false
     t.text    "annotated_sequence"
     t.integer "total_residue"
     t.integer "fullatom"
   end
+
+# Could not dump table "protein_backbone_atom_atom_pairs" because of following StandardError
+#   Unknown type 'REAL' for column 'N_N_dist'
+
+# Could not dump table "protein_backbone_torsion_angles" because of following StandardError
+#   Unknown type 'REAL' for column 'phi'
 
 # Could not dump table "protein_residue_conformation" because of following StandardError
 #   Unknown type 'REAL' for column 'phi'
@@ -148,6 +199,9 @@ ActiveRecord::Schema.define(:version => 0) do
     t.text "svn_version"
     t.text "script"
   end
+
+# Could not dump table "radius_of_gyration" because of following StandardError
+#   Unknown type 'REAL' for column 'radius_of_gyration'
 
 # Could not dump table "residue_atom_coords" because of following StandardError
 #   Unknown type 'REAL' for column 'x'
@@ -170,6 +224,15 @@ ActiveRecord::Schema.define(:version => 0) do
 
   add_index "residue_pdb_identification", ["struct_id", "residue_number"], :name => "sqlite_autoindex_residue_pdb_identification_1", :unique => true
 
+# Could not dump table "residue_scores_1b" because of following StandardError
+#   Unknown type 'REAL' for column 'score_value'
+
+# Could not dump table "residue_scores_2b" because of following StandardError
+#   Unknown type 'REAL' for column 'score_value'
+
+# Could not dump table "residue_scores_lr_2b" because of following StandardError
+#   Unknown type 'REAL' for column 'score_value'
+
   create_table "residue_secondary_structure", :primary_key => "struct_id", :force => true do |t|
     t.integer "resNum", :null => false
     t.text    "dssp"
@@ -177,62 +240,8 @@ ActiveRecord::Schema.define(:version => 0) do
 
   add_index "residue_secondary_structure", ["struct_id", "resNum"], :name => "sqlite_autoindex_residue_secondary_structure_1", :unique => true
 
-# Could not dump table "residue_type" because of following StandardError
-#   Unknown type 'REAL' for column 'nbr_radius'
-
-# Could not dump table "residue_type_atom" because of following StandardError
-#   Unknown type 'REAL' for column 'charge'
-
-  create_table "residue_type_bond", :primary_key => "residue_type_set_name", :force => true do |t|
-    t.text    "residue_type_name"
-    t.integer "atom1"
-    t.integer "atom2"
-    t.integer "bond_type"
-  end
-
-  add_index "residue_type_bond", ["residue_type_set_name", "residue_type_name", "atom1", "atom2"], :name => "sqlite_autoindex_residue_type_bond_1", :unique => true
-
-  create_table "residue_type_chi", :primary_key => "residue_type_set_name", :force => true do |t|
-    t.text    "residue_type_name"
-    t.text    "atom1"
-    t.text    "atom2"
-    t.text    "atom3"
-    t.text    "atom4"
-    t.integer "chino"
-  end
-
-  add_index "residue_type_chi", ["residue_type_set_name", "residue_type_name", "atom1", "atom2", "atom3", "atom4"], :name => "sqlite_autoindex_residue_type_chi_1", :unique => true
-
-# Could not dump table "residue_type_chi_rotamer" because of following StandardError
-#   Unknown type 'REAL' for column 'mean'
-
-  create_table "residue_type_cut_bond", :primary_key => "residue_type_set_name", :force => true do |t|
-    t.text    "residue_type_name"
-    t.integer "atom1"
-    t.integer "atom2"
-  end
-
-  add_index "residue_type_cut_bond", ["residue_type_set_name", "residue_type_name", "atom1", "atom2"], :name => "sqlite_autoindex_residue_type_cut_bond_1", :unique => true
-
-# Could not dump table "residue_type_icoor" because of following StandardError
-#   Unknown type 'REAL' for column 'phi'
-
-  create_table "residue_type_property", :primary_key => "residue_type_set_name", :force => true do |t|
-    t.text "residue_type_name"
-    t.text "property"
-  end
-
-  add_index "residue_type_property", ["residue_type_set_name", "residue_type_name", "property"], :name => "sqlite_autoindex_residue_type_property_1", :unique => true
-
-# Could not dump table "residue_type_proton_chi" because of following StandardError
-#   Unknown type 'REAL' for column 'sample'
-
-  create_table "residue_type_variant_type", :primary_key => "residue_type_set_name", :force => true do |t|
-    t.text "residue_type_name"
-    t.text "variant_type"
-  end
-
-  add_index "residue_type_variant_type", ["residue_type_set_name", "residue_type_name", "variant_type"], :name => "sqlite_autoindex_residue_type_variant_type_1", :unique => true
+# Could not dump table "residue_total_scores" because of following StandardError
+#   Unknown type 'REAL' for column 'score_value'
 
   create_table "residues", :primary_key => "struct_id", :force => true do |t|
     t.integer "resNum",   :null => false
@@ -253,6 +262,24 @@ ActiveRecord::Schema.define(:version => 0) do
 
   add_index "sampled_structures", ["tag", "batch_id"], :name => "sqlite_autoindex_sampled_structures_1", :unique => true
 
+  create_table "score_function_method_options", :primary_key => "batch_id", :force => true do |t|
+    t.text "score_function_name"
+    t.text "option_key"
+    t.text "option_value"
+  end
+
+  add_index "score_function_method_options", ["batch_id", "score_function_name", "option_key"], :name => "sqlite_autoindex_score_function_method_options_1", :unique => true
+
+# Could not dump table "score_function_weights" because of following StandardError
+#   Unknown type 'REAL' for column 'weight'
+
+  create_table "score_types", :primary_key => "batch_id", :force => true do |t|
+    t.integer "score_type_id",   :null => false
+    t.text    "score_type_name", :null => false
+  end
+
+  add_index "score_types", ["batch_id", "score_type_id"], :name => "sqlite_autoindex_score_types_1", :unique => true
+
   create_table "secondary_structure_segments", :primary_key => "struct_id", :force => true do |t|
     t.integer "segment_id",    :null => false
     t.integer "residue_begin", :null => false
@@ -265,21 +292,18 @@ ActiveRecord::Schema.define(:version => 0) do
 # Could not dump table "smotifs" because of following StandardError
 #   Unknown type 'REAL' for column 'distance'
 
+  create_table "structure_scores", :primary_key => "batch_id", :force => true do |t|
+    t.integer "struct_id",     :null => false
+    t.integer "score_type_id", :null => false
+    t.integer "score_value",   :null => false
+  end
+
+  add_index "structure_scores", ["batch_id", "struct_id", "score_type_id"], :name => "sqlite_autoindex_structure_scores_1", :unique => true
+
   create_table "structures", :primary_key => "struct_id", :force => true do |t|
     t.integer "batch_id"
     t.text    "tag"
     t.text    "input_tag"
   end
-
-  add_index "structures", ["struct_id"], :name => "sqlite_autoindex_structures_1", :unique => true
-
-# Could not dump table "unrecognized_atoms" because of following StandardError
-#   Unknown type 'REAL' for column 'coord_x'
-
-# Could not dump table "unrecognized_neighbors" because of following StandardError
-#   Unknown type 'REAL' for column 'unrecognized_residue_number'
-
-# Could not dump table "unrecognized_residues" because of following StandardError
-#   Unknown type 'REAL' for column 'max_temperature'
 
 end

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name3: MyText
+  res_type: MyText
+  resnum: 1
+  structure: 
+
+two:
+  name3: MyText
+  res_type: MyText
+  resnum: 1
+  structure: 

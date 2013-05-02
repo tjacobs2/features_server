@@ -10,6 +10,13 @@
   <%= @structure.input_tag %>
 </p>
 
+<h2>Residues</h2>
+<% @structure.residues.each do |residue| %>
+  <p>
+    <b>Residue type:</b>
+    <%= residue.res_type %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_structure_path(@structure) %> |
 <%= link_to 'Back', structures_path %>

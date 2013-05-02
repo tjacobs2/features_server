@@ -1,5 +1,8 @@
 FeaturesServer::Application.routes.draw do
-  resources :structures
+  resources :structures do
+    resources :residues
+  end
+
 
 
   get "home/index"
