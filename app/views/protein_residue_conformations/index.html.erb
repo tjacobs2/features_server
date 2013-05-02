@@ -1,0 +1,34 @@
+<h1>Listing structures</h1>
+
+<table>
+  <tr>
+    <th>Structure ID</th>
+    <th>Residue Number</th>
+    <th>Secondary structure</th>
+    <th>Phi</th>
+    <th>Psi</th>
+    <th>Omega</th>
+    <th>Chi1</th>
+    <th>Chi2</th>
+    <th>Chi3</th>
+    <th>Chi4</th>
+  </tr>
+
+<% @residues.each do |conformation| %>
+  <tr>
+    <td><%= conformation.struct_id %></td>
+    <td><%= conformation.seqpos %></td>
+    <td><%= conformation.secstruct %></td>
+    <td><%= conformation.phi %></td>
+    <td><%= conformation.psi %></td>
+    <td><%= conformation.omega %></td>
+    <td><%= conformation.chi1 %></td>
+    <td><%= conformation.chi2 %></td>
+    <td><%= conformation.chi3 %></td>
+    <td><%= conformation.chi4 %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

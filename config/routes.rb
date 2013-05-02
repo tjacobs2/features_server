@@ -1,8 +1,9 @@
 FeaturesServer::Application.routes.draw do
   resources :structures do
-    resources :residues
+    resources :residues, :protein_residue_conformations
   end
 
+  resources :queries
 
 
   get "home/index"

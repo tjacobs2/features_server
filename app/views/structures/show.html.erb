@@ -16,7 +16,16 @@
     <b>Residue type:</b>
     <%= residue.res_type %>
   </p>
+
+  <p>
+    <b>Residue number:</b>
+    <%= residue.resnum %>
+  </p>
+
+  <p>
+    <b>Residue name 3:</b>
+    <%= residue.name3 %>
+  </p>
 <% end %>
 
-<%= link_to 'Edit', edit_structure_path(@structure) %> |
 <%= link_to 'Back', structures_path %>

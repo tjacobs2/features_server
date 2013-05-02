@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Batch</th>
+    <th>Structure ID</th>
     <th>Input tag</th>
     <th></th>
     <th></th>
@@ -11,11 +11,11 @@
 
 <% @structures.each do |structure| %>
   <tr>
-    <td><%= structure.batch_id %></td>
+    <td><%= structure.struct_id %></td>
     <td><%= structure.input_tag %></td>
+    <td><%= link_to "Residues", structure_residues_path(structure) %></td>
+    <td><%= link_to "Residue Conformation", structure_protein_residue_conformations_path(structure) %></td>
     <td><%= link_to 'Show', structure %></td>
-    <td><%= link_to 'Edit', edit_structure_path(structure) %></td>
-    <td><%= link_to 'Destroy', structure, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

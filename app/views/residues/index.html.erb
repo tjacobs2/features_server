@@ -1,0 +1,22 @@
+<h1>Listing structures</h1>
+
+<table>
+  <tr>
+    <th>Structure ID</th>
+    <th>Residue Number</th>
+    <th>Residue Type</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @residues.each do |residue| %>
+  <tr>
+    <td><%= residue.struct_id %></td>
+    <td><%= residue.resnum %></td>
+    <td><%= residue.res_type %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
