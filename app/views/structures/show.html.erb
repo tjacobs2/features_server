@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Batch:</b>
+  <%= @structure.batch_id %>
+</p>
+
+<p>
+  <b>Input tag:</b>
+  <%= @structure.input_tag %>
+</p>
+
+
+<%= link_to 'Edit', edit_structure_path(@structure) %> |
+<%= link_to 'Back', structures_path %>
