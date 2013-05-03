@@ -1,31 +1,13 @@
 <p id="notice"><%= notice %></p>
+<h1>HELLO RAILS</h1>
 
-<p>
-  <b>Batch:</b>
-  <%= @structure.batch_id %>
-</p>
-
-<p>
-  <b>Input tag:</b>
-  <%= @structure.input_tag %>
-</p>
-
-<h2>Residues</h2>
-<% @structure.residues.each do |residue| %>
+<h2>Struture colums</h2>
+<% @query.structure_columns.each do |c| %>
   <p>
-    <b>Residue type:</b>
-    <%= residue.res_type %>
+    <b>column name:</b>
+    <%= c %>
   </p>
 
-  <p>
-    <b>Residue number:</b>
-    <%= residue.resnum %>
-  </p>
-
-  <p>
-    <b>Residue name 3:</b>
-    <%= residue.name3 %>
-  </p>
 <% end %>
 
 <%= link_to 'Back', structures_path %>

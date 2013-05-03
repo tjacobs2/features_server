@@ -1,9 +1,17 @@
 <%= form_for(@query) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_area :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class="field">
+		<table>
+			<% Structure.columns.each do |column| %>
+				<tr>
+					<td>
+						<%= check_box_tag 'structure_columns[]', column.name %>
+						<%= label_tag(:structure_columns,Structure.human_attribute_name(column.name)) %>
+					</td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
 <% end %>

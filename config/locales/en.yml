@@ -3,3 +3,12 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    models:
+      structure: "Structure"
+    attributes:
+      structure:
+        struct_id: "Structure ID"
+        input_tag: "Input File"
+        tag: "Input Tag"

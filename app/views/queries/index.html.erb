@@ -1,25 +1,14 @@
-<h1>Listing structures</h1>
+<h1>Listing queries</h1>
 
 <table>
   <tr>
-    <th>Structure ID</th>
-    <th>Input tag</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Query name</th>
   </tr>
 
-<% @structures.each do |structure| %>
   <tr>
-    <td><%= structure.struct_id %></td>
-    <td><%= structure.input_tag %></td>
-    <td><%= link_to "Residues", structure_residues_path(structure) %></td>
-    <td><%= link_to "Residue Conformation", structure_protein_residue_conformations_path(structure) %></td>
-    <td><%= link_to 'Show', structure %></td>
+    <td><%= structure.name %></td>
   </tr>
-<% end %>
-</table>
 
 <br />
 
-<%= link_to 'New Structure', new_structure_path %>
+<%= link_to 'New Query', new_query_path %>
