@@ -22,15 +22,27 @@ class QueriesController < ApplicationController
     end
   end
 
-  # POST /queries
-  # POST /queries.json
-  def create
-    @query = Query.new(params[:structure_columns])
+  # GET /queries/generate_query
+  # GET /queries/generate_query.json
+  def generate
+    #@query = Query.new(params[:structure_columns])
+    @query = Query.new
 
-	respond_to do |format|
-		format.html { redirect_to @query }
-	end
+    respond_to do |format|
+    	format.html # show.html.erb
+    end
 
   end
+
+  # POST /queries
+  # POST /queries.json
+  #def create
+  #  @query = Query.new(params[:structure_columns])
+
+  #  respond_to do |format|
+  #  	format.html # new.html.erb
+  #  end
+
+  #end
 
 end

@@ -1,13 +1,5 @@
 <p id="notice"><%= notice %></p>
-<h1>HELLO RAILS</h1>
-
-<h2>Struture colums</h2>
-<% @query.structure_columns.each do |c| %>
-  <p>
-    <b>column name:</b>
-    <%= c %>
-  </p>
-
-<% end %>
+<h2>query name</h2>
+<% @query.name %>
 
 <%= link_to 'Back', structures_path %>

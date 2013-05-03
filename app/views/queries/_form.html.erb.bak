@@ -1,6 +1,4 @@
-<%= form_tag("/queries/generate_query", :method => "get") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
+<%= form_for(@query) do |f| %>
 	<div class="field">
 		<table>
 			<% Structure.columns.each do |column| %>
@@ -14,6 +12,6 @@
 		</table>
 	</div>
 	<div class="actions">
-  		<%= submit_tag("Generate Query") %>
+		<%= f.submit %>
 	</div>
 <% end %>

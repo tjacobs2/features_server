@@ -6,7 +6,8 @@ class Query
 	attr_accessor :name, :structure_columns
 
 	def initialize(structure_columns = [])
-		@structure_columns = name, structure_columns
+		@structure_columns = structure_columns
+		@name = nil
 	end
 
 	def test

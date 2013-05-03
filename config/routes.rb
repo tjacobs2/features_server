@@ -4,6 +4,7 @@ FeaturesServer::Application.routes.draw do
   end
 
   resources :queries
+  match "/queries/generate_query" => "query#generate"
 
 
   get "home/index"
